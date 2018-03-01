@@ -1,0 +1,39 @@
+<!--
+  Generated template for the DetalhesLojaPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+  <ion-navbar color="primary">
+    <ion-title>{{ loja.loja_nome }}</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <img [src]="'http://maconaria.dinizapps.com.br/ws/images/lojas/'+loja.loja_id+'.jpg'">
+    
+    <ion-card-content>
+      <h1 ion-text color="primary">{{ loja.loja_nome }}</h1>
+      <p>{{ loja.loja_historia }}</p>  
+      <p ion-text text-center color="secondary">
+        <strong>{{ loja.loja_telefone }}</strong>
+      </p>
+      <br>
+      <p>{{ loja.loja_endereco }}</p>      
+    </ion-card-content>
+    
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>12 Likes</div>
+        </button>
+      </ion-col>
+    </ion-row>    
+  </ion-card>
+</ion-content>

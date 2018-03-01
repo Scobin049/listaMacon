@@ -1,5 +1,14 @@
 {
   "name": "listaMacon",
   "app_id": "",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies":[
+    {
+      "path": "/maconaria_api/",
+      "proxyUrl": "https://lista-maconaria.firebaseio.com/"
+    }
+  ]
 }

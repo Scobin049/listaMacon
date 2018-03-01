@@ -1,18 +1,34 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary"> 
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Lista Maçon</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content class="content">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar (ionInput)="buscaLojas($event)"></ion-searchbar>
+  <ion-list padding>
+    <ion-item-sliding *ngFor="let loja of lista_lojas">
+      <button ion-item text-wrap (click)="busca_irmaos(loja.loja_id)">
+        <ion-thumbnail item-start>
+          <img [src]="'http://maconaria.dinizapps.com.br/ws/images/lojas/'+loja.loja_id+'.jpg'">
+        </ion-thumbnail>        
+        <h2>{{ loja.loja_nome }}</h2>
+        <p>{{ loja.loja_endereco }}</p>
+        <p ion-text color="secondary" class="foneloja">
+          <strong>{{ loja.loja_telefone }}</strong>
+        </p>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="busca_detalhes(loja.loja_id)">
+          <ion-icon name="information-circle" class="icon-side-right"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
