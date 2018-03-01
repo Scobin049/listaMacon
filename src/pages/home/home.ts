@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, NavParams } from 'ionic-angular';
-import { DetalhesIrmaoPage } from '../detalhes-irmao/detalhes-irmao';
 import { DetalhesLojaPage } from '../detalhes-loja/detalhes-loja';
 import { LojaProvider } from '../../providers/loja/loja';
+import { ListaIrmaosPage } from '../lista-irmaos/lista-irmaos';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   providers: [LojaProvider]
 })
+
+
 export class HomePage {
   public lista_lojas = new Array<any>(); 
+  public loja_filtro;
   
   public loader;
   public refresher;
@@ -24,10 +27,12 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public navParams: NavParams,
     private lojaProvider: LojaProvider
-  ) { }
+  ) {
+    
+  }
   
-  busca_irmaos(id){
-    this.navCtrl.push(DetalhesIrmaoPage,{id : id});
+  busca_irmaos(id, nome){
+    this.navCtrl.push(ListaIrmaosPage,{id : id, nome : nome});
   }
   
   busca_detalhes(id){
@@ -56,8 +61,20 @@ export class HomePage {
     this.carregaLojas(true);
   }
   
-  buscaLojas(event){
+  initializeItems(){
+    this.carregaLojas();
+  }
+  
+  buscaLojas(ev: any){   
+    let val = ev.target.value;
     
+    this.initializeItems();
+    
+    if (val && val.trim() != '') {
+      this.lista_lojas = this.lista_lojas.filter((item) => {
+        return (item.loja_nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }   
   }
   
   carregaLojas(newpage:Boolean = false){
@@ -70,7 +87,7 @@ export class HomePage {
       this.isRefreshing = false;
     }    
   }
-
+  
   /*---(newpage:Boolean = false){
     this.abreLoader();  
     this.lojaProvider.getLojas(this.page).subscribe(
@@ -106,7 +123,7 @@ export class HomePage {
   
   
   
-  ionViewDidLoad() { 
+  ionViewDidLoad() {
     this.page = 1;
     this.carregaLojas();   
   }

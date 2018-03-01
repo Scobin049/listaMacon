@@ -1,18 +1,18 @@
-<!--
-  Generated template for the ListaIrmaosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>ListaIrmaos</ion-title>
+  <ion-navbar color="primary"> 
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Lista irmãos<br>
+      <small ion-text text-uppercase color="darkenprimary">{{ loja_nome }}</small>
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar (ionInput)="buscaLojas($event)"></ion-searchbar>
 </ion-content>

@@ -8,8 +8,7 @@ import { LojaProvider } from '../../providers/loja/loja';
   templateUrl: 'detalhes-loja.html',
 })
 export class DetalhesLojaPage {
-  public loja = new Array<any>();
-  
+  public loja;
   public loader;
   public refresher;
   public isRefreshing:Boolean = false; 

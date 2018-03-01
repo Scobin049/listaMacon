@@ -14,7 +14,7 @@
   <ion-searchbar (ionInput)="buscaLojas($event)"></ion-searchbar>
   <ion-list padding>
     <ion-item-sliding *ngFor="let loja of lista_lojas">
-      <button ion-item text-wrap (click)="busca_irmaos(loja.loja_id)">
+      <button ion-item text-wrap (click)="busca_irmaos(loja.loja_id, loja.loja_nome)">
         <ion-thumbnail item-start>
           <img [src]="'http://maconaria.dinizapps.com.br/ws/images/lojas/'+loja.loja_id+'.jpg'">
         </ion-thumbnail>        

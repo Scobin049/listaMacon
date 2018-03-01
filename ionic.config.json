@@ -4,11 +4,5 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  },
-  "proxies":[
-    {
-      "path": "/maconaria_api/",
-      "proxyUrl": "https://lista-maconaria.firebaseio.com/"
-    }
-  ]
+  }
 }

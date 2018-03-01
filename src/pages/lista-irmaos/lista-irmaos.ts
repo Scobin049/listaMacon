@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { LojaProvider } from '../../providers/loja/loja';
 
 /**
  * Generated class for the ListaIrmaosPage page.
@@ -14,12 +15,45 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'lista-irmaos.html',
 })
 export class ListaIrmaosPage {
+  public lista_irmaos = new Array<any>(); 
+  public loja_nome;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public loader;
+  public refresher;
+  public isRefreshing:Boolean = false; 
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public lojaProvider: LojaProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaIrmaosPage');
+  abreLoader() {
+    this.loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    this.loader.present();
+  }    
+  fechaLoader() {      
+    this.loader.dismiss();
+  }
+
+  carregaIrmaos(newpage:Boolean = false){
+    this.loja_nome = this.navParams.data.nome;
+    this.abreLoader();  
+    this.lista_irmaos = this.lojaProvider.getIrmaos(this.navParams.data.id);
+    console.log(this.lista_irmaos);
+    
+    this.fechaLoader();
+    if(this.isRefreshing){
+      this.refresher.complete();
+      this.isRefreshing = false;
+    }    
+  }
+
+  ionViewDidLoad() {    
+    this.carregaIrmaos();
   }
 
 }
